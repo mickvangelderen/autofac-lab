@@ -5,18 +5,18 @@ namespace AutofacLab
 {
     public class Handler
     {
-        private readonly ILogger<Handler> _logger;
+        private readonly ILogger<Handler> _loggerFactory;
 
-        public Handler(ILogger<Handler> logger)
+        public Handler(ILoggerFactory loggerFactory)
         {
-            _logger = logger;
+            _loggerFactory = loggerFactory.CreateLogger<Handler>();
         }
 
         public void Handle(string someEvent)
         {
-            using (_logger.BeginScope(nameof(Handle)))
+            using (_loggerFactory.BeginScope(nameof(Handle)))
             {
-                _logger.LogInformation("Handled event {event}", someEvent);
+                _loggerFactory.LogInformation("Handled event {event}", someEvent);
             }
         }
     }

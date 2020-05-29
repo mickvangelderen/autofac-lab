@@ -9,10 +9,10 @@ namespace AutofacLab
         private readonly ILogger<Application> _logger;
         private readonly Handler _handler;
 
-        public Application(ILogger<Application> logger, Handler handler)
+        public Application(ILoggerFactory loggerFactory)
         {
-            _logger = logger;
-            _handler = handler;
+            _logger = loggerFactory.CreateLogger<Application>();
+            _handler = new Handler(loggerFactory);
         }
 
         public void Run()
